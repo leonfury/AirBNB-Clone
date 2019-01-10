@@ -1,0 +1,42 @@
+<h1> User Edit </h1>
+
+
+<p> ID : <%= @user.id %> </p>
+<p> First Name : <%= @user.first_name %> </p>
+<p> Last Name : <%= @user.last_name %> </p>
+<p> Email : <%= @user.email %> </p>
+<p> Joined On : <%= @user.created_at %> </p>
+
+
+<!-- local disables remote forms -->
+<%= form_with model: @user, method: :patch, local: true do |form| %>
+    <div class="text-field">
+        <%= form.label :email %>
+        <%= form.text_field :email, id: :testing, class: :testclass,value: @user.email %>
+    </div>
+      
+    <div class="text-field">
+        <%= form.label :First_Name %>
+        <%= form.text_field :first_name, value: @user.first_name %>
+    </div>
+    
+    <div class="text-field">
+        <%= form.label :Last_Name %>
+        <%= form.text_field :last_name, value: @user.last_name %>
+    </div>
+
+    <div class="text-field">
+        <%= form.label :password %>
+        <%= form.text_field :password, type: "password" %>
+    </div>
+
+    <div class="submit-field">
+        <%= form.submit %>
+    </div>
+    <!-- passes to user params -->
+    <!-- <%= form.check_box :testing_scope_box %> Label check box form -->
+    <br>
+<% end %>
+
+<!-- outside of user params -->
+<!-- <%= check_box_tag :testing_scope_tag %> Label check box tag -->
