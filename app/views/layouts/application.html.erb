@@ -17,7 +17,8 @@
       <%= link_to t(".sign_in"), sign_in_path %>
     <% end -%>
   </div>
-
+  <%= link_to "Sign in with Google", "/auth/google_oauth2" %> 
+  
   <div id="flash">
     <% flash.each do |key, value| -%>
       <div id="flash_<%= key %>"><%=h value %></div>
