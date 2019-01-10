@@ -1,6 +1,6 @@
 class Authentication < ApplicationRecord
     belongs_to :user
-
+    
     def self.create_with_omniauth(auth_hash)
         self.new(
           provider: auth_hash["provider"],

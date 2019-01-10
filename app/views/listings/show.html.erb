@@ -1,0 +1,24 @@
+<h1> Listing Show </h1>
+
+<p> ID >>> <%= @listing.id %>  </p>
+<p> Title >>> <%= @listing.title %>  </p>
+<p> Description >>>  <%= @listing.description %>  </p>
+<p> Address >>> <%= @listing.address %>  </p>
+<p> District >>>  <%= @listing.district %>  </p>
+<p> State >>> <%= @listing.state %>  </p>
+<p> Country >>>  <%= @listing.country %>  </p>
+<p> No. of Rooms >>> <%= @listing.room %>  </p>
+<p> No. of Baths >>> <%= @listing.bath %>  </p>
+<p> No. of Adult >>>  <%= @listing.adult %>  </p>
+<p> No. of Children >>>   <%= @listing.children %>  </p>
+<p> Price >>>  <%= @listing.price %> </p>
+<p> Created By >>> <%= @listing.user_id %>  </p>
+<p> Created On >>> <%= local_time(@listing.created_at) %>  </p>
+
+<p> Calendar </p>
+<% if @listing.user_id == user_id && signed_in? %>
+    <%= button_to "Edit", edit_listing_path(@listing.id), method: :get, class: "btn btn-secondary outline" %>
+    <%= button_to "Delete", listing_path(@listing.id), method: :delete, class: "btn btn-secondary outline" %>
+<% end %>
+
+<%= button_to "Make Reservation", class: "btn btn-secondary outline" %>

@@ -1,0 +1,5 @@
+<h1> Listing Edit </h1>
+
+<%= form_with model: @listing, local: true do |form| %>
+    <%= render partial: '/listings/form', object: form %>
+<% end %>

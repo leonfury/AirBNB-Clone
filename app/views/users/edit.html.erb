@@ -9,26 +9,8 @@
 
 
 <!-- local disables remote forms -->
-<%= form_with model: @user, method: :patch, local: true do |form| %>
-    <div class="text-field">
-        <%= form.label :email %>
-        <%= form.text_field :email, id: :testing, class: :testclass,value: @user.email %>
-    </div>
-      
-    <div class="text-field">
-        <%= form.label :First_Name %>
-        <%= form.text_field :first_name, value: @user.first_name %>
-    </div>
-    
-    <div class="text-field">
-        <%= form.label :Last_Name %>
-        <%= form.text_field :last_name, value: @user.last_name %>
-    </div>
-
-    <div class="text-field">
-        <%= form.label :password %>
-        <%= form.text_field :password, type: "password" %>
-    </div>
+<%= form_with model: @user, local: true do |form| %>
+    <%= render partial: '/users/form', object: form %>
 
     <div class="submit-field">
         <%= form.submit %>
