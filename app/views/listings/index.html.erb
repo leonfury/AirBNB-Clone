@@ -1,15 +1,16 @@
 <h1> Listing Index </h1>
 
-<h6> Search </h6>
-<form method="post" action="/search" >
-    <textarea  type=text placeholder="Search" name="search" class="w-25">  </textarea>
-    </br></br>
-    <input type=submit value="Search" class="btn btn-raised btn-secondary text-center">
-</form>
+<h6> Search Title </h6>
+<%= form_with url: listings_path, method: "get", local: true do %>
+    <%= label_tag(:title, "Search for:") %>
+    <%= text_field_tag(:title) %> 
+    <%= submit_tag("Search") %>
+<% end %>
 
 <hr>
+<p> Total Listings: <%= @listings.count %> </p>
 
-<table class="table">
+<table class="table" id="listing_index">
     <tr>
         <th> View </th>
         <th> ID </th>

@@ -23,6 +23,10 @@ class ListingsController < ApplicationController
             y = max_price
             @listings.where(price: (min_price..max_price))
         end
+
+        if params[:title]
+            @listings = Listing.where('lower(title) LIKE ?', "%#{params[:title].downcase}%") #more secure? % is wildcard in sql?
+        end
     end
 
     def show
@@ -58,7 +62,6 @@ class ListingsController < ApplicationController
             :adult, 
             :children, 
             :price, 
-            :search
         )
       end 
 end

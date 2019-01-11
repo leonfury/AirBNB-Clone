@@ -10,6 +10,12 @@ Rails.application.routes.draw do
 
   resources :users #creates routes
   resources :listings
+
+  resources :search, only: [:index] do
+    collection do
+      get 'results'
+    end
+  end
   #####################################################
   root "listings#index"
 

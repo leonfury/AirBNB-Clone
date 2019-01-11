@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 
@@ -14,7 +18,7 @@
   <% end %>
 
   <div id="header" class="row">
-    <%= button_to "Home", root_path, method: :get, class: 'btn btn-secondary ml-3' %>
+    <%= button_to "Home", root_path, method: :get, id: 'test', class: 'btn btn-secondary ml-3' %>
 
     <% if signed_in? -%>
       <%= button_to "Create Listings", new_listing_path, method: :get, class: 'btn btn-secondary ml-3' %>
