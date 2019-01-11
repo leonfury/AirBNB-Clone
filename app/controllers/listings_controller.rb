@@ -5,7 +5,6 @@ class ListingsController < ApplicationController
     end
 
     def create
-        p "############################################CREATE"
         list = Listing.new(listing_params)
         list.user_id = user_id
         list.save
@@ -15,7 +14,6 @@ class ListingsController < ApplicationController
 
     def index
         @listings = Listing.all 
-
         min_price = Listing.all.minimum("price") 
         max_price = Listing.all.maximum("price")
         if  !true
@@ -23,9 +21,16 @@ class ListingsController < ApplicationController
             y = max_price
             @listings.where(price: (min_price..max_price))
         end
+    end
 
+    def results
         if params[:title]
-            @listings = Listing.where('lower(title) LIKE ?', "%#{params[:title].downcase}%") #more secure? % is wildcard in sql?
+            @listings = Listing.where('lower(title) LIKE ?', "%#{params[:title].downcase}%") #more secure? % % is wildcard in sql
+        else
+            @listings = Listing.all
+        end
+        respond_to do |format|
+            format.js
         end
     end
 
@@ -47,6 +52,8 @@ class ListingsController < ApplicationController
         @listing = Listing.find(params[:id]).delete
         redirect_to root_path
     end
+
+
 
     private
     def listing_params

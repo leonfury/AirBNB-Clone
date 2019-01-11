@@ -11,13 +11,10 @@ Rails.application.routes.draw do
   resources :users #creates routes
   resources :listings
 
-  resources :search, only: [:index] do
-    collection do
-      get 'results'
-    end
-  end
+ 
   #####################################################
   root "listings#index"
+  get "/search" => "listings#results", as: "search"
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
