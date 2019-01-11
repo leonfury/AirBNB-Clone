@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Clearance::User
+  paginates_per 15
   validates :email, uniqueness: true
   validates :password, presence: true, on: :create
   has_many :listings

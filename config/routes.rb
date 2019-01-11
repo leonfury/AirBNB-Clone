@@ -14,7 +14,7 @@ Rails.application.routes.draw do
  
   #####################################################
   root "listings#index"
-  get "/search" => "listings#results", as: "search"
+  # get "/search" => "listings#results", as: "search"
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"

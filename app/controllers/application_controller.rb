@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   include Clearance::Controller
-  helper_method :user_id
+  helper_method :c_user_id
   helper_method :user_name
   helper_method :local_time
 
-  def user_id
+  def c_user_id
     current_user.id
   end
 

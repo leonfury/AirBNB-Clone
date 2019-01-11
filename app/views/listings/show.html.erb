@@ -16,9 +16,10 @@
 <p> Created On >>> <%= local_time(@listing.created_at) %>  </p>
 
 <p> Calendar </p>
-<% if @listing.user_id == user_id && signed_in? %>
-    <%= button_to "Edit", edit_listing_path(@listing.id), method: :get, class: "btn btn-secondary outline" %>
-    <%= button_to "Delete", listing_path(@listing.id), method: :delete, class: "btn btn-secondary outline" %>
+<% if signed_in? %>
+    <% if @listing.user_id == c_user_id %>
+        <%= button_to "Edit", edit_listing_path(@listing.id), method: :get, class: "btn btn-secondary outline" %>
+        <%= button_to "Delete", listing_path(@listing.id), method: :delete, class: "btn btn-secondary outline" %>
+    <% end %>
 <% end %>
-
 <%= button_to "Make Reservation", class: "btn btn-secondary outline" %>

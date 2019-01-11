@@ -2,17 +2,15 @@
 
 <h6> Search Title </h6>
  <!-- changed from local true to remote true -->
-<%= form_with url: search_path, method: "get", remote: true do %>
+<%= form_with url: listings_path, method: "get" do %>
     <%= label_tag(:title, "Search for:") %>
     <%= text_field_tag(:title) %> 
     <%= submit_tag("Search") %>
 <% end %>
 
 <hr>
-<p> Total Listings: <%= @listings.count %> </p>
 
-<table class="table" id="listing_index">
-   
+<div id="listing_index">
     <%= render partial: '/listings/result' %>
 
-</table>
+</div>
