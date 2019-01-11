@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: 5c369a379326211bd281c671598e203f5be5a0d0
+  branch: master
+  specs:
+    faker (1.9.1)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -231,6 +239,7 @@ DEPENDENCIES
   chromedriver-helper
   clearance
   coffee-rails (~> 4.2)
+  faker!
   figaro
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)

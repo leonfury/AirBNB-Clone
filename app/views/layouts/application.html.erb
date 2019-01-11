@@ -15,7 +15,6 @@
 
   <div id="header" class="row">
     <%= button_to "Home", root_path, method: :get, class: 'btn btn-secondary ml-3' %>
-    <%= button_to "Listings", listings_path, method: :get, class: 'btn btn-secondary ml-3' %>
 
     <% if signed_in? -%>
       <%= button_to "Create Listings", new_listing_path, method: :get, class: 'btn btn-secondary ml-3' %>
@@ -23,6 +22,7 @@
       <%= button_to t(".sign_out"), sign_out_path, method: :delete, class: 'btn btn-secondary ml-3' %>
 
     <% else -%>
+      <%= button_to "Sign Up", sign_up_path, method: :get, class: 'btn btn-secondary ml-3' %>
       <%= button_to t(".sign_in"), sign_in_path, method: :get, class: 'btn btn-secondary ml-3' %>
       <%= button_to "Sign in with Google", "/auth/google_oauth2", method: :get, class: 'btn btn-secondary ml-3' %> 
       

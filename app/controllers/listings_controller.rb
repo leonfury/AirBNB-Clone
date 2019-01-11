@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
     
-    def new
+    def new         
         @listing = Listing.new
     end
 
@@ -14,7 +14,15 @@ class ListingsController < ApplicationController
     end
 
     def index
-        @listings = Listing.all    
+        @listings = Listing.all 
+
+        min_price = Listing.all.minimum("price") 
+        max_price = Listing.all.maximum("price")
+        if  !true
+            x = min_price
+            y = max_price
+            @listings.where(price: (min_price..max_price))
+        end
     end
 
     def show
@@ -50,6 +58,7 @@ class ListingsController < ApplicationController
             :adult, 
             :children, 
             :price, 
+            :search
         )
       end 
 end
