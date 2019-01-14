@@ -15,6 +15,7 @@
 <p> Created By >>> <%= @listing.user_id %>  </p>
 <p> Created On >>> <%= local_time(@listing.created_at) %>  </p>
 
+
 <p> Calendar </p>
 <% if signed_in? %>
     <% if @listing.user_id == c_user_id %>
@@ -23,3 +24,8 @@
     <% end %>
 <% end %>
 <%= button_to "Make Reservation", class: "btn btn-secondary outline" %>
+
+<h4> Listing Images </h4>
+<% @listing.images.each do |img| %>
+    <%= image_tag img.thumb.url.to_s %>
+<% end %>

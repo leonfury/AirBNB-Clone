@@ -77,7 +77,8 @@ class ListingsController < ApplicationController
             :bath, 
             :adult, 
             :children, 
-            :price, 
+            :price,
+            {images: []}
         )
       end 
 end

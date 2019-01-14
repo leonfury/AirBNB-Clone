@@ -13,7 +13,7 @@
         <th> Delete </th>
     </tr>
 
-    <% @users.each do |user| %>
+    <% @users.order("id ASC").each do |user| %>
         <tr>
             <th> <%= user.id %> </th>
             <th> <%= user.first_name %> </th>

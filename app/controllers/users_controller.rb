@@ -38,7 +38,6 @@ class UsersController < Clearance::UsersController
         else
             user.update(user_params)
         end
-        byebug
         redirect_back(fallback_location: root_path)
     end
 

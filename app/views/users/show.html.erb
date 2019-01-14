@@ -6,6 +6,6 @@
 <p> Role : <%= @user.role %> </p>
 <p> Email : <%= @user.email %> </p>
 <p> Joined On : <%= @user.created_at %> </p>
-<%= image_tag @user.photo_url.to_s %>
+<%= image_tag @user.photo.thumb.url.to_s %>
 
 <%=  %>

@@ -53,6 +53,11 @@
     <%= form.text_field :price %>
 </div>
 
+<div class="text-field">
+    <%= form.label :Listing_Images %>
+    <%= form.file_field :images, multiple: true %>
+</div>
+
 <div class="submit-field">
     <%= form.submit %>
 </div>
