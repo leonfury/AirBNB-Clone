@@ -4,6 +4,10 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password, presence: true, on: :create
   has_many :listings
+
+  ##roles
+  enum role: [:member, :moderator, :superadmin]
+
   #########################################################################
   # For google sign in
   has_many :authentications, dependent: :destroy

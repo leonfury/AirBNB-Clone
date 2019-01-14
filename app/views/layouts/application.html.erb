@@ -12,8 +12,10 @@
 </head>
 <body>
   <h1> AirBNB CLONE </h1>
-  <h4> Is Sign In? : <%= signed_in? %> </h4>
+  <p> Is Sign In? : <%= signed_in? %> </p>
   <% if signed_in? %>
+    <p> Is Moderator? : <%= is_moderator? %> </p>
+    <p> Is Superadmin? : <%= is_admin? %> </p>
     <p> Current User ID : <%= c_user_id %>  </p>
   <% end %>
 
@@ -22,7 +24,10 @@
 
     <% if signed_in? -%>
       <%= button_to "Create Listings", new_listing_path, method: :get, class: 'btn btn-secondary ml-3' %>
-      <%= button_to "Users", users_path, method: :get, class: 'btn btn-secondary ml-3' %>
+
+      <% if is_admin? %>
+        <%= button_to "Users", users_path, method: :get, class: 'btn btn-secondary ml-3' %>
+      <% end %>  
       <%= button_to t(".sign_out"), sign_out_path, method: :delete, class: 'btn btn-secondary ml-3' %>
 
     <% else -%>
@@ -41,7 +46,8 @@
   </div>
 
   <hr>
-
-  <%= yield %>
+    <section class="mr-2 ml-2">
+        <%= yield %>
+    </section>  
 </body>
 </html>

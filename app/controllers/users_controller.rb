@@ -48,6 +48,8 @@ class UsersController < Clearance::UsersController
         redirect_to "/"
     end
 
+    
+
     private
     def user_params
       params.require(:user).permit(
@@ -55,6 +57,7 @@ class UsersController < Clearance::UsersController
         :password, 
         :first_name, 
         :last_name, 
+        :verify,
       )
     end 
 end

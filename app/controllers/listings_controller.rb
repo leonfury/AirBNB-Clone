@@ -1,5 +1,4 @@
 class ListingsController < ApplicationController
-    
     def new         
         @listing = Listing.new
     end
@@ -13,22 +12,22 @@ class ListingsController < ApplicationController
     end
 
     def index
-        min_price = Listing.all.minimum("price") 
+        @listings = Listing.all
+        min_price = Listing.all.minimum("price")
         max_price = Listing.all.maximum("price")
         
-        # if  !true
-        #     x = min_price
-        #     y = max_price
-        #     @listings.where(price: (min_price..max_price))
-        # end
-        
-        if params[:title] != nil
-            @listings = Listing.where('lower(title) LIKE ?', "%#{params[:title].downcase}%") #more secure? % % is wildcard in sql
-        else
-            @listings = Listing.all
+        if params[:min_price] || params[:max_price]
+            min_price = params[:min_price].to_i
+            max_price = params[:max_price].to_i
+            @listings = @listings.where(price: (min_price..max_price))
         end
         
-        @listings = @listings.order(:price).page params[:page]
+        if params[:title]
+            @listings = @listings.where('lower(title) LIKE ?', "%#{params[:title].downcase}%") #more secure? % % is wildcard in sql
+        end
+        
+        @listings = @listings.order(:price).page (params[:page])
+        
         respond_to do |format|
             format.html    
             format.js
@@ -56,6 +55,13 @@ class ListingsController < ApplicationController
     def destroy
         @listing = Listing.find(params[:id]).delete
         redirect_to root_path
+    end
+
+    def verify
+        if current_user.role != "member"
+            Listing.find(params[:id]).update(verify: true)
+        end
+        redirect_back(fallback_location: root_path)
     end
 
     private

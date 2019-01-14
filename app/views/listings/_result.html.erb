@@ -3,26 +3,38 @@
 
 <table class="table" >
     <tr>
-            <th> View </th>
-            <th> ID </th>
-            <th> Title </th>
-            <th> Description </th>
-            <th> Address </th>
-            <th> District </th>
-            <th> State </th>
-            <th> Country </th>
-            <th> No. of Rooms </th>
-            <th> No. of Baths </th>
-            <th> No. of Adult </th>
-            <th> No. of Children </th>
-            <th> Price </th>
-            <th> Created By </th>
-            <th> Created On </th>
-        </tr>
-
+        <th> Verified? </th>
+        <th> View </th>
+        <th> ID </th>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Address </th>
+        <th> District </th>
+        <th> State </th>
+        <th> Country </th>
+        <th> No. of Rooms </th>
+        <th> No. of Baths </th>
+        <th> No. of Adult </th>
+        <th> No. of Children </th>
+        <th> Price </th>
+        <th> Created By </th>
+        <th> Created On </th>
+    </tr>
 
     <% @listings.each do |list| %>
         <tr>
+            <td>
+                <% if list.verify %>
+                    VERIFIED 
+                
+                <% else %>
+                    <% if !is_member? %>    
+                        <%= button_to "Verify Listing", verify_listing_path(list.id), method: :post, class: 'btn btn-secondary ml-3' %>
+                    <% else %>
+                        UNVERIFIED
+                    <% end %>
+                <% end %>
+            </td>
             <td>
                 <%= button_to "View", listing_path(list.id), method: :get %>
             </td>

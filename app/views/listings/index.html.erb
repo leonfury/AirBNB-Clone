@@ -3,10 +3,20 @@
 <h6> Search Title </h6>
  <!-- changed from local true to remote true -->
 <%= form_with url: listings_path, method: "get" do %>
-    <%= label_tag(:title, "Search for:") %>
+    <%= label_tag(:title, "Title:") %>
     <%= text_field_tag(:title) %> 
+
+    <%= label_tag(:min_price, "Minimum Price:") %>
+    <%= text_field_tag(:min_price) %> 
+
+    <%= label_tag(:max_price, "Maximum Price:") %>
+    <%= text_field_tag(:max_price) %> 
+
     <%= submit_tag("Search") %>
 <% end %>
+
+
+
 
 <hr>
 
