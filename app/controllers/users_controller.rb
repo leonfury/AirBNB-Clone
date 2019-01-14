@@ -34,9 +34,11 @@ class UsersController < Clearance::UsersController
             user.update(first_name: user_params["first_name"])
             user.update(last_name: user_params["last_name"])
             user.update(email: user_params["email"])
+            user.update(photo: user_params["photo"])
         else
             user.update(user_params)
         end
+        byebug
         redirect_back(fallback_location: root_path)
     end
 
@@ -58,6 +60,7 @@ class UsersController < Clearance::UsersController
         :first_name, 
         :last_name, 
         :verify,
+        :photo
       )
     end 
 end

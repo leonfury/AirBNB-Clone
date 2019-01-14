@@ -70,4 +70,6 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'kaminari'
+gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
 #################################################################
