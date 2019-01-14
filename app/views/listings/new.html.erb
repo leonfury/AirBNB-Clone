@@ -1,8 +1,8 @@
-<h1> Listing New </h1>
-<div>
+<div class="w-75 m-auto form-group  p-3">
+<h1> Create a New Listing </h1>
 
-<%= form_with model: @listing, scope: "listing" do |form| %>
-    <%= render partial: '/listings/form', object: form %>
-<% end %>
+    <%= form_with model: @listing, scope: "listing" do |form| %>
+        <%= render partial: '/listings/form', object: form %>
+    <% end %>
 </div>
       
