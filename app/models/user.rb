@@ -4,6 +4,7 @@ class User < ApplicationRecord
     validates :email, uniqueness: true
     validates :password, presence: true, on: :create
     has_many :listings
+    has_many :bookings
 
     ##roles
     enum role: [:member, :moderator, :superadmin]

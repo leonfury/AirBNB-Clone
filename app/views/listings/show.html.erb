@@ -1,60 +1,104 @@
-<p> Calendar </p>
-<%= button_to "Make Reservation", class: "btn btn-secondary outline" %>
+<div class="row">
 
-<div class="card-deck w-75 m-auto">
-    <div class="card">
+    <div class="card-deck col-6 p-4">
+        <div class="card">
 
-        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-            
+            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                
                 <div class="carousel-inner">
-                        <% if @listing.images.count > 0 %>                 
-                            <div class="carousel-item active" data-interval="2000" style="height: 300px;">
-                                <%= image_tag list.images[0].url.to_s, class:"d-block w-100" %>
+                    <% if @listing.images.count > 0 %>                 
+                        <div class="carousel-item active" data-interval="2000" style="height: 300px;">
+                            <%= image_tag list.images[0].url.to_s, class:"d-block w-100" %>
+                        </div>
+        
+                        <% @listing.images.each do |img| %>
+                            <div class="carousel-item" data-interval="2000" style="height: 300px;">
+                                <%= image_tag img.thumb.url.to_s, class:"d-block w-100" %>
                             </div>
-            
-                            <% @listing.images.each do |img| %>
-                                <div class="carousel-item" data-interval="2000" style="height: 300px;">
-                                    <%= image_tag img.thumb.url.to_s, class:"d-block w-100" %>
-                                </div>
-                            <% end %> 
-                        <% end %>
-                    </div>
+                        <% end %> 
+                    <% end %>
+                </div>
 
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
 
-        <div class="card-body">
-            <h1 class="card-title"> <%= @listing.title %> </h1>
-            <p class="card-text"> <%= @listing.description %> </p>
-            <h5 class="card-text"> Address </h5>
-            <p> <%= @listing.address %>, <%= @listing.district %>, <%= @listing.state %>,  <%= @listing.country %> </p>
+            <div class="card-body">
+                <h1 class="card-title"> <%= @listing.title %> </h1>
+                <p class="card-text"> <%= @listing.description %> </p>
+                <h5 class="card-text"> Address </h5>
+                <p> <%= @listing.address %>, <%= @listing.district %>, <%= @listing.state %>,  <%= @listing.country %> </p>
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-text"> Build Up </h5>
+                        <p> <%= @listing.room %>  Rooms  | <%= @listing.bath %> Baths </p>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="card-text"> Accomodates </h5>
+                        <p> <%= @listing.adult %> Adults | <%= @listing.children %> Rooms </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p> Hosted By <%= @listing.user.first_name %>  </p>
+                <h4 class="text-danger"> RM <span id="price_per_night"> <%= @listing.price %> </span> per night </h4>
+                <% if signed_in? %>
+                    <% if @listing.user_id == c_user_id %>
+                        <div class="row"> <%= button_to "Edit", edit_listing_path(@listing.id), method: :get, class: "btn btn-primary mr-3" %>
+                        <%= button_to "Delete", listing_path(@listing.id), method: :delete, class: "btn btn-primary" %> </p>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div> 
+
+    <div class="col-6 p-4">
+        <%= month_calendar do |date| %>
+            <% if availability_calendar(date, @bookings) %>
+                <!-- avialable -->
+                <div id="<%= date %>" class="c_day text-center" style="width: 25px; height: 25px;"> <%= date.day %> </div>
+            <% else %>
+                <!-- booked -->
+                <div id="<%= date %>" class="c_day border rounded-circle text-center bg-danger text-white" style="width: 25px; height: 25px;"> <%= date.day %> </div>
+            <% end %>
+        <% end %>
+
+        
+        <br>
+        <%= form_with url: listing_bookings_path(@listing.id), method: :create, scope: "booking" do |form| %>
             <div class="row">
                 <div class="col-6">
-                    <h5 class="card-text"> Build Up </h5>
-                    <p> <%= @listing.room %>  Rooms  | <%= @listing.bath %> Baths </p>
+                    <p> Check In Date </p>
+                    <input id="check_in_date" type="date" name="booking[check_in]" min="<%= Date.today().to_s %>"/>
                 </div>
                 <div class="col-6">
-                    <h5 class="card-text"> Accomodates </h5>
-                    <p> <%= @listing.adult %> Adults | <%= @listing.children %> Rooms </p>
+                    <p> Check Out Date </p>
+                    <input id="check_out_date" type="date" name="booking[check_out]"  />
+                    
                 </div>
+
+                <p class="col-6 mt-4"> Total Nights >>> <span id="disp_total_nights"> 0 </span> </p>
+
+                <p class="col-6 mt-4"> Total Price >>> <span id="disp_total_price"> 0 </span> </p>
+
             </div>
-        </div>
-        <div class="card-footer">
-            <p> Hosted By <%= @listing.user.first_name %>  </p>
-            <h4 class="text-danger"> RM <%= @listing.price %> per night </h4>
-            <% if signed_in? %>
-                <% if @listing.user_id == c_user_id %>
-                    <div class="row"> <%= button_to "Edit", edit_listing_path(@listing.id), method: :get, class: "btn btn-primary mr-3" %>
-                    <%= button_to "Delete", listing_path(@listing.id), method: :delete, class: "btn btn-primary" %> </p>
-                <% end %>
-            <% end %>
-        </div>
+            <br>
+            <div id="create_booking_btn" class="submit-field text-center">
+                <%= form.submit class:"btn btn-primary" %>
+            </div>
+            <div id="booking_valid" class="d-none text-center">
+                <p> Booking dates are invalid! </p>
+            </div>
+        <% end %>
     </div>
 </div>
+
+<%= render partial: '/bookings/list_index' %>
+
+<br><br><br><br><br><br>
