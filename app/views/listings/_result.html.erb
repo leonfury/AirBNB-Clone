@@ -54,9 +54,9 @@
         </tr>
     <% end %>
 </table> -->
-<div class="row">
+<div class="row w-100">
     <% @listings.each do |list| %>
-        <div class="card-deck col-3 p-2">
+        <div class="card-deck col-4 p-2">
             <div class="card">
         
                 <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
@@ -104,13 +104,15 @@
                 <div class="card-footer">
                     <p> Hosted By <%= list.user.first_name %>  </p>
                     <h4 class="text-danger"> RM <%= list.price %> per night </h4>
-                    <%= button_to "View", listing_path(list.id), method: :get, class: "btn btn-primary mr-3" %>
-                    <% if signed_in? %>
-                        <% if list.user_id == c_user_id %>
-                            <div class="row"> <%= button_to "Edit", edit_listing_path(list.id), method: :get, class: "btn btn-primary mr-3" %>
-                            <%= button_to "Delete", listing_path(list.id), method: :delete, class: "btn btn-primary" %> </p>
+                    <p> 
+                        <%= link_to "View", listing_path(list.id), method: :get, class: "d-inline btn btn-primary mr-3" %>
+                        <% if signed_in? %>
+                            <% if list.user_id == c_user_id %>
+                                <%= link_to "Edit", edit_listing_path(list.id), method: :get, class: "d-inline btn btn-primary mr-3" %>
+                                <%= link_to "Delete", listing_path(list.id), method: :delete, class: "d-inline btn btn-primary" %> 
+                            <% end %>
                         <% end %>
-                    <% end %>
+                    </p>
                 </div>
             </div>
         </div>

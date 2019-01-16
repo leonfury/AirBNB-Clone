@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
     helper_method :total_night
     helper_method :total_price
     helper_method :availability_calendar
-    
     def c_user_id
         current_user.id
     end
@@ -65,4 +64,5 @@ class ApplicationController < ActionController::Base
         end
         true
     end
+
 end

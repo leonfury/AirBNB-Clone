@@ -24,3 +24,10 @@ module AirbnbClone
     # the framework and any gems in your application.
   end
 end
+
+
+
+####################################################
+#brain tree
+require 'braintree'
+####################################################

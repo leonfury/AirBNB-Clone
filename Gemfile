@@ -74,4 +74,5 @@ gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'fog-aws'
 gem "simple_calendar", "~> 2.0"
+gem 'braintree'
 #################################################################

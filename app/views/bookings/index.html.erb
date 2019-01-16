@@ -1,0 +1,28 @@
+<h1> My Bookings </h1>
+
+<table class="table table-hover">
+    <tr>
+        <th> For Listing Name </th>
+        <th> Check In Date </th>
+        <th> Check Out Date </th>
+        <th> Total Price </th>
+        <th> Hosted By User </th>
+        <th> Booking Status </th>
+    </tr> 
+    <% @bookings.each do |b| %>
+        <tr>
+            <td> <%= link_to b.listing.title, listing_path(b.listing) %> </td>
+            <td> <%= b.check_in %> </td>
+            <td> <%= b.check_out %> </td>
+            <td> <%= b.price %> </td>
+            <td> <%= link_to b.user.first_name, user_path(b.user)  %> </td>
+            <td> 
+                <% if !b.booking_status %>
+                    <%= link_to "Pay Now", payment_path(b.id) %>
+                <% else %> 
+                    PAID
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

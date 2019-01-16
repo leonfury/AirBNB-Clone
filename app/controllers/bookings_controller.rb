@@ -1,4 +1,8 @@
 class BookingsController < ApplicationController
+    def index
+        @bookings = Booking.where(book_by: c_user_id)
+    end
+    
     def create
         listing = Listing.find(params[:listing_id])
         book = Booking.new(booking_params)
