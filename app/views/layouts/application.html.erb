@@ -19,6 +19,7 @@
         <ul class="navbar-nav mr-auto">
             <%= link_to "Home", root_path, method: :get, id: 'test', class: 'text-white btn btn-info ml-2' %>
             <% if signed_in? -%>
+                <%= link_to "My Bookings", bookings_path, class: 'text-white btn btn-info ml-4' %>
                 <%= link_to "Create Listings", new_listing_path, method: :get, class: 'text-white btn btn-info ml-4' %>
                 <% if is_admin? %>
                     <%= link_to "Users", users_path, method: :get, class: 'text-white btn btn-info ml-4' %>
