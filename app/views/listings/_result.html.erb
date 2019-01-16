@@ -1,0 +1,41 @@
+<tr>
+        <th> View </th>
+        <th> ID </th>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Address </th>
+        <th> District </th>
+        <th> State </th>
+        <th> Country </th>
+        <th> No. of Rooms </th>
+        <th> No. of Baths </th>
+        <th> No. of Adult </th>
+        <th> No. of Children </th>
+        <th> Price </th>
+        <th> Created By </th>
+        <th> Created On </th>
+    </tr>
+
+
+<% @listings.each do |list| %>
+    <tr>
+        <td>
+            <%= button_to "View", listing_path(list.id), method: :get %>
+        </td>
+        <td> <%= list.id %> </td>
+        <td> <%= list.title %> </td>
+        <td> <%= list.description %> </td>
+        <td> <%= list.address %> </td>
+        <td> <%= list.district %> </td>
+        <td> <%= list.state %> </td>
+        <td> <%= list.country %> </td>
+        <td> <%= list.room %> </td>
+        <td> <%= list.bath %> </td>
+        <td> <%= list.adult %> </td>
+        <td> <%= list.children %> </td>
+        <td> <%= list.price %> </td>
+        <td> <%= list.user_id %> </td>
+        <td> <%= local_time(list.created_at) %> </td>
+    </tr>
+<% end %>
+

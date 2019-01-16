@@ -14,3 +14,11 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+$(document).on('turbolinks:load', function(){
+   var listing = document.getElementById('listing_index')
+   console.log(listing)
+})
+
+

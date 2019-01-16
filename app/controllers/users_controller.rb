@@ -1,6 +1,10 @@
 class UsersController < Clearance::UsersController
     # layout "authentication"
   
+    def new
+        @user = User.new
+    end
+
     def create #for validation success & failures & using flash message
         user = User.new(user_params)
         if user.save
@@ -24,11 +28,6 @@ class UsersController < Clearance::UsersController
         @user = User.find(params[:id])
     end
 
-    def destroy
-        @user = User.find(params[:id]).delete
-        redirect_to "/"
-    end
-
     def update
         user = User.find(params[:id])
         if user_params["password"] == ""
@@ -38,9 +37,15 @@ class UsersController < Clearance::UsersController
         else
             user.update(user_params)
         end
-        
-        p user.errors.messages
-        redirect_to '/users'
+        redirect_back(fallback_location: root_path)
+    end
+
+    def destroy
+        user = User.find(params[:id])
+        user_auth = Authentication.find_by(user_id: user.id)
+        user_auth.delete
+        user.delete
+        redirect_to "/"
     end
 
     private

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 
@@ -9,20 +13,34 @@
 <body>
   <h1> AirBNB CLONE </h1>
   <h4> Is Sign In? : <%= signed_in? %> </h4>
-  
-  <div id="header">
+  <% if signed_in? %>
+    <p> Current User ID : <%= user_id %>  </p>
+  <% end %>
+
+  <div id="header" class="row">
+    <%= button_to "Home", root_path, method: :get, id: 'test', class: 'btn btn-secondary ml-3' %>
+
     <% if signed_in? -%>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+      <%= button_to "Create Listings", new_listing_path, method: :get, class: 'btn btn-secondary ml-3' %>
+      <%= button_to "Users", users_path, method: :get, class: 'btn btn-secondary ml-3' %>
+      <%= button_to t(".sign_out"), sign_out_path, method: :delete, class: 'btn btn-secondary ml-3' %>
+
     <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
+      <%= button_to "Sign Up", sign_up_path, method: :get, class: 'btn btn-secondary ml-3' %>
+      <%= button_to t(".sign_in"), sign_in_path, method: :get, class: 'btn btn-secondary ml-3' %>
+      <%= button_to "Sign in with Google", "/auth/google_oauth2", method: :get, class: 'btn btn-secondary ml-3' %> 
+      
     <% end -%>
   </div>
 
+  
   <div id="flash">
     <% flash.each do |key, value| -%>
       <div id="flash_<%= key %>"><%=h value %></div>
     <% end %>
   </div>
+
+  <hr>
 
   <%= yield %>
 </body>
