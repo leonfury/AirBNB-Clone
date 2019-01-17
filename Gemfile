@@ -75,4 +75,5 @@ gem 'fog-aws'
 gem "simple_calendar", "~> 2.0"
 gem 'braintree'
 gem "letter_opener", :group => :development
+gem 'sidekiq'
 #################################################################
