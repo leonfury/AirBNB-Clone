@@ -2,7 +2,8 @@
 
 <h6> Search Title </h6>
  <!-- changed from local true to remote true -->
-<%= form_with url: listings_path, method: "get" do %>
+<%= form_with url: listings_path, method: "get", remote: true do %>
+<%#= form_with url: search_path, method: "get", remote: true do %>
     <%= label_tag(:title, "Title:") %>
     <%= text_field_tag(:title) %> 
 
@@ -15,12 +16,10 @@
     <%= submit_tag("Search") %>
 <% end %>
 
-
-
-
 <hr>
 
-<div id="listing_index w-100">
+<div id="listing_index" class="w-100">
+
     <%= render partial: '/listings/result' %>
 
 </div>

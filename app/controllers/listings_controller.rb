@@ -30,14 +30,39 @@ class ListingsController < ApplicationController
         end
         
         @listings = @listings.order(:price).page (params[:page])
-        respond_to do |format|
-            format.html    
+
+        respond_to do |format|    
             format.js
+            format.html
         end
     end
 
     def results
+        # #begin
+        # @listings = Listing.all
+        
+        # min_price = Listing.all.minimum("price")
+        # max_price = Listing.all.maximum("price")
+        # if params[:title] != nil
+        #     @listings = @listings.where('lower(title) LIKE ?', "%#{params[:title].downcase}%") #more secure? % % is wildcard in sql
+        # end
 
+        # if params[:min_price] != "" && params[:min_price] != nil
+        #     min_price = params[:min_price].to_i
+        #     @listings = @listings.where(price: (min_price..max_price))
+        # end
+
+        # if params[:max_price] != "" && params[:max_price] != nil
+        #     max_price = params[:max_price].to_i
+        #     @listings = @listings.where(price: (min_price..max_price))
+        # end
+        
+        # @listings = @listings.order(:price).page (params[:page])
+        # # byebug
+        # respond_to do |format|    
+        #     format.js
+        # end
+        # #end
     end
 
     def show

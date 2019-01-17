@@ -24,13 +24,13 @@ class BraintreeController < ApplicationController
         nonce = params["payment_method_nonce"]
     
         result = gateway.transaction.sale(
-          amount: amount,
+          amount: '200.00',
           payment_method_nonce: nonce,
           :options => {
             :submit_for_settlement => true
           }
         )
-        if result.success? || result.transaction
+        if result.success?
             Booking.find(params[:booking_id]).update(booking_status: true)
             flash[:success] = "Payment Successful!"
             redirect_to payment_result_path(booking_id: params[:booking_id], result_id: result.transaction.id)

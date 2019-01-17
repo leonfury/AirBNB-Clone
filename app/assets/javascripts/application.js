@@ -118,4 +118,5 @@ $(document).on('turbolinks:load', function(){
     $("#check_out_date").change(function(){
         execute_book(c_in.value, c_out.value);
     })
+
 })

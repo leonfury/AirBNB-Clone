@@ -1,4 +1,7 @@
-<%= paginate @listings %>
+<div id="paginator">
+    <%= paginate @listings, remote: true %>
+</div>
+
 <!--
 <table class="table" >
     <tr>
@@ -53,7 +56,9 @@
             <td> <%= local_time(list.created_at) %> </td>
         </tr>
     <% end %>
-</table> -->
+</table>
+-->
+
 <div class="row w-100">
     <% @listings.each do |list| %>
         <div class="card-deck col-4 p-2">
@@ -118,3 +123,4 @@
         </div>
     <% end %>
 </div>
+

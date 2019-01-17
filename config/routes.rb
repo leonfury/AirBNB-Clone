@@ -34,5 +34,7 @@
     post '/bookings/:booking_id/payment' => 'braintree#create', as: "payment_create"
     get '/bookings/:booking_id/payment/:result_id' => 'braintree#show', as: "payment_result"
 
+    #for listing search ajax load
+    # get "/search" => "listings#results", as: "search"
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     end
