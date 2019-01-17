@@ -7,6 +7,7 @@ require 'rails/all'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'fog/aws'
+require 'sidekiq/web'
 ###################################################
 
 # Require the gems listed in Gemfile, including any gems

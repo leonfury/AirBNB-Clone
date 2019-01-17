@@ -14,7 +14,8 @@ class BookingsController < ApplicationController
             book.listing_id = listing.id
             book.user_id = listing.user_id
             book.save
-            BookingMailer.booking_mail(book, current_user).deliver_now
+            # BookingMailer.booking_mail(book, current_user).deliver_later(wait: 1.hour)
+            MailingJob.perform_later(book, current_user)
             flash[:success] = "Booking Created Successfully"
         end
     end
