@@ -6,7 +6,7 @@
   <body>
     <h1>Congratulations! You have received a booking from <%= @booker.first_name %></h1>
     <p>
-      You can see details of your new reservation here: <%= @book.listing.title %>
+      You can see details of your new reservation here: <%= @book.listing.title %> at <%= link_to 'Welcome', payment_url(@book.id) %>
     </p>
   </body>
 </html>

@@ -1,4 +1,4 @@
-class ReservationMailer < ApplicationMailer
+class BookingMailer < ApplicationMailer
 
     def booking_mail(reservation, book_by_user) 
         @book = reservation

@@ -14,7 +14,7 @@ class BookingsController < ApplicationController
             book.listing_id = listing.id
             book.user_id = listing.user_id
             book.save
-            ReservationMailer.booking_mail(book, current_user).deliver_now
+            BookingMailer.booking_mail(book, current_user).deliver_now
             flash[:success] = "Booking Created Successfully"
         end
     end
