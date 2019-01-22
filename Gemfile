@@ -76,4 +76,5 @@ gem "simple_calendar", "~> 2.0"
 gem 'braintree'
 gem "letter_opener", :group => :development
 gem 'sidekiq'
+gem 'rails_12factor', group: :production
 #################################################################
