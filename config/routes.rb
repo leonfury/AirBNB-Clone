@@ -1,27 +1,42 @@
-Rails.application.routes.draw do
-  resources :passwords, controller: "clearance/passwords", only: [:create, :new]
-  resource :session, controller: "clearance/sessions", only: [:create]
+    Rails.application.routes.draw do
+  
+    resources :passwords, controller: "clearance/passwords", only: [:create, :new]
+    resource :session, controller: "clearance/sessions", only: [:create]
 
-  resources :users, only: [:create] do
-    resource :password,
-      controller: "clearance/passwords",
-      only: [:create, :edit, :update]
-  end
+    resources :users, only: [:create] do
+        resource :password,
+        controller: "clearance/passwords",
+        only: [:create, :edit, :update]
+    end
 
-  resources :users #creates routes
-  resources :listings
+    resources :users #creates routes
+    resources :listings
 
- 
-  #####################################################
-  root "listings#index"
-  get "/search" => "listings#results", as: "search"
+    resources :listings, only: [:show] do
+       resources :bookings, only: [:create]
+    end
 
-  get "/sign_in" => "clearance/sessions#new", as: "sign_in"
-  delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
-  get "/sign_up" => "clearance/users#new", as: "sign_up"
+    resources :bookings, except: [:new, :create, :edit, :update, :delete]
+    
+    #####################################################
+    root "listings#index"
+    post "/verify_listing/:id" => "listings#verify", as: "verify_listing"
 
-  # for google authorization
-  get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+    get "/sign_in" => "clearance/sessions#new", as: "sign_in"
+    delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
+    get "/sign_up" => "clearance/users#new", as: "sign_up"
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-end
+    # for google authorization
+    get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
+    #for braintree
+    get '/bookings/:booking_id/payment' => 'braintree#new', as: "payment"
+    post '/bookings/:booking_id/payment' => 'braintree#create', as: "payment_create"
+    get '/bookings/:booking_id/payment/:result_id' => 'braintree#show', as: "payment_result"
+
+    #for sidekiq
+    mount Sidekiq::Web => '/sidekiq'
+    #for listing search ajax load
+    # get "/search" => "listings#results", as: "search"
+    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+    end

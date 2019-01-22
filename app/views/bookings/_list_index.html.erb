@@ -1,0 +1,28 @@
+<table class="table table-hover">
+    <tr>
+        <th> Book By User ID </th>
+        <th> Book By User </th>
+        <th> Check In Date </th>
+        <th> Check Out Date </th>
+        <th> Price </th>
+        <th> Hosted By ID </th>
+        <th> Hosted By User </th>
+        <th> For Listing ID </th>
+        <th> For Listing Name </th>
+        <th> Booking Status </th>
+    </tr>
+    <% @bookings.order("check_in ASC").each do |b| %>
+        <tr>
+            <td> <%= b.book_by %> </td>
+            <td> <%= User.find(b.book_by).first_name %> </td>
+            <td> <%= b.check_in %> </td>
+            <td> <%= b.check_out %> </td>
+            <td> <%= b.price %> </td>
+            <td> <%= b.user_id %> </td>
+            <td> <%= User.find(b.user_id).first_name %> </td>
+            <td> <%= b.listing_id %> </td>
+            <td> <%= Listing.find(b.listing_id).title %> </td>
+            <td> <%= b.booking_status %> </td>
+        </tr>
+    <% end %>
+</table>

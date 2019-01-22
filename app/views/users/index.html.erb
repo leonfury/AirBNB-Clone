@@ -1,5 +1,5 @@
 <h1> User Index </h1>
-
+<%= paginate @users %>
 <table class="table">
     <tr>
         <th> ID </th>
@@ -7,18 +7,20 @@
         <th> Last Name </th>
         <th> Email </th>
         <th> Joined On </th>
+        <th> Role </th>
         <th> View </th>
         <th> Edit </th>
         <th> Delete </th>
     </tr>
 
-    <% @users.each do |user| %>
+    <% @users.order("id ASC").each do |user| %>
         <tr>
             <th> <%= user.id %> </th>
             <th> <%= user.first_name %> </th>
             <th> <%= user.last_name %> </th>
             <th> <%= user.email %> </th>
             <th> <%= user.created_at %> </th>
+            <th> <%= user.role %> </th>
             <th>
                 <%= link_to "View User", user_path(user.id), class: "btn btn-secondary outline" %>
             </th>

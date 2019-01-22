@@ -1,4 +1,11 @@
-<tr>
+<div id="paginator">
+    <%= paginate @listings, remote: true %>
+</div>
+
+<!--
+<table class="table" >
+    <tr>
+        <th> Verified? </th>
         <th> View </th>
         <th> ID </th>
         <th> Title </th>
@@ -16,26 +23,104 @@
         <th> Created On </th>
     </tr>
 
+    <% @listings.each do |list| %>
+        <tr>
+            <td>
+                <% if list.verify %>
+                    VERIFIED 
+                
+                <% else %>
+                    <% if !is_member? %>    
+                        <%= button_to "Verify Listing", verify_listing_path(list.id), method: :post, class: 'btn btn-secondary ml-3' %>
+                    <% else %>
+                        UNVERIFIED
+                    <% end %>
+                <% end %>
+            </td>
+            <td>
+                
+            </td>
+            <td> <%= list.id %> </td>
+            <td> <%= list.title %> </td>
+            <td> <%= list.description %> </td>
+            <td> <%= list.address %> </td>
+            <td> <%= list.district %> </td>
+            <td> <%= list.state %> </td>
+            <td> <%= list.country %> </td>
+            <td> <%= list.room %> </td>
+            <td> <%= list.bath %> </td>
+            <td> <%= list.adult %> </td>
+            <td> <%= list.children %> </td>
+            <td> <%= list.price %> </td>
+            <td> <%= list.user_id %> </td>
+            <td> <%= local_time(list.created_at) %> </td>
+        </tr>
+    <% end %>
+</table>
+-->
 
-<% @listings.each do |list| %>
-    <tr>
-        <td>
-            <%= button_to "View", listing_path(list.id), method: :get %>
-        </td>
-        <td> <%= list.id %> </td>
-        <td> <%= list.title %> </td>
-        <td> <%= list.description %> </td>
-        <td> <%= list.address %> </td>
-        <td> <%= list.district %> </td>
-        <td> <%= list.state %> </td>
-        <td> <%= list.country %> </td>
-        <td> <%= list.room %> </td>
-        <td> <%= list.bath %> </td>
-        <td> <%= list.adult %> </td>
-        <td> <%= list.children %> </td>
-        <td> <%= list.price %> </td>
-        <td> <%= list.user_id %> </td>
-        <td> <%= local_time(list.created_at) %> </td>
-    </tr>
-<% end %>
+<div class="row w-100">
+    <% @listings.each do |list| %>
+        <div class="card-deck col-4 p-2">
+            <div class="card">
+        
+                <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                    
+                    <div class="carousel-inner">
+                        <% if list.images.count > 0 %>                 
+                            <div class="carousel-item active" data-interval="2000" style="height: 300px;">
+                                <%= image_tag list.images[0].url.to_s, class:"d-block w-100" %>
+                            </div>
+            
+                            <% list.images.each do |img| %>
+                                <div class="carousel-item" data-interval="2000" style="height: 300px;">
+                                    <%= image_tag img.thumb.url.to_s, class:"d-block w-100" %>
+                                </div>
+                            <% end %> 
+                        <% end %>
+                    </div>
+        
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    </div>
+        
+                <div class="card-body">
+                    <h1 class="card-title"> <%= list.title %> </h1>
+                    <p class="card-text"> <%= list.description %> </p>
+                    <h5 class="card-text"> Address </h5>
+                    <p> <%= list.address %>, <%= list.district %>, <%= list.state %>,  <%= list.country %> </p>
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="card-text"> Build Up </h5>
+                            <p> <%= list.room %>  Rooms  | <%= list.bath %> Baths </p>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="card-text"> Accomodates </h5>
+                            <p> <%= list.adult %> Adults | <%= list.children %> Rooms </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p> Hosted By <%= list.user.first_name %>  </p>
+                    <h4 class="text-danger"> RM <%= list.price %> per night </h4>
+                    <p> 
+                        <%= link_to "View", listing_path(list.id), method: :get, class: "d-inline btn btn-primary mr-3" %>
+                        <% if signed_in? %>
+                            <% if list.user_id == c_user_id %>
+                                <%= link_to "Edit", edit_listing_path(list.id), method: :get, class: "d-inline btn btn-primary mr-3" %>
+                                <%= link_to "Delete", listing_path(list.id), method: :delete, class: "d-inline btn btn-primary" %> 
+                            <% end %>
+                        <% end %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
 

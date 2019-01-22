@@ -17,7 +17,7 @@ class UsersController < Clearance::UsersController
     end
 
     def index
-        @users = User.all    
+        @users = User.all.page params[:page]
     end
 
     def show
@@ -34,6 +34,7 @@ class UsersController < Clearance::UsersController
             user.update(first_name: user_params["first_name"])
             user.update(last_name: user_params["last_name"])
             user.update(email: user_params["email"])
+            user.update(photo: user_params["photo"])
         else
             user.update(user_params)
         end
@@ -48,6 +49,8 @@ class UsersController < Clearance::UsersController
         redirect_to "/"
     end
 
+    
+
     private
     def user_params
       params.require(:user).permit(
@@ -55,6 +58,8 @@ class UsersController < Clearance::UsersController
         :password, 
         :first_name, 
         :last_name, 
+        :verify,
+        :photo
       )
     end 
 end

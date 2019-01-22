@@ -63,11 +63,18 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 #################################################################
-# 
 gem 'clearance'
 gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'kaminari'
+gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
+gem 'fog-aws'
+gem "simple_calendar", "~> 2.0"
+gem 'braintree'
+gem "letter_opener", :group => :development
+gem 'sidekiq'
+gem 'rails_12factor', group: :production
 #################################################################

@@ -3,5 +3,9 @@
 <p> ID : <%= @user.id %> </p>
 <p> First Name : <%= @user.first_name %> </p>
 <p> Last Name : <%= @user.last_name %> </p>
+<p> Role : <%= @user.role %> </p>
 <p> Email : <%= @user.email %> </p>
 <p> Joined On : <%= @user.created_at %> </p>
+<%= image_tag @user.photo.thumb.url.to_s %>
+
+<%=  %>

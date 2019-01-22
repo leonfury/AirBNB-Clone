@@ -1,58 +1,70 @@
-<div class="text-field">
-    <%= form.label :Title %>
-    <%= form.text_field :title %>
-</div>
+<div class="row">
+    <div class="col-5 border-left border-right">    
+        <div class="form-group">
+            <%= form.label :Title %>
+            <br> <%= form.text_area :title, rows: 4, class:"w-100" %>
+        </div>
 
-<div class="text-field">
-    <%= form.label :Description %>
-    <%= form.text_field :description %>
-</div>
+        <div class="form-group">
+            <%= form.label :Description %>
+            <br> <%= form.text_area :description, rows: 11, class:"w-100" %>
+        </div>
+    </div>
 
-<div class="text-field">
-    <%= form.label :Address %>
-    <%= form.text_field :address %>
-</div>
+    <div class="col-4 border-right">
+        <div class="form-group">
+            <%= form.label :Address %>
+            <br> <%= form.text_field :address, class:"w-100" %>
+        </div>
 
-<div class="text-field">
-    <%= form.label :District %>
-    <%= form.text_field :district %>
-</div>
+        <div class="form-group">
+            <%= form.label :District %>
+            <br> <%= form.text_field :district, class:"w-100" %>
+        </div>
 
-<div class="text-field">
-    <%= form.label :State %>
-    <%= form.text_field :state %>
-</div>
+        <div class="form-group">
+            <%= form.label :State %>
+            <br> <%= form.text_field :state, class:"w-100" %>
+        </div>
 
-<div class="text-field">
-    <%= form.label :Country %>
-    <%= form.text_field :country %>
-</div>
+        <div class="form-group">
+            <%= form.label :Country %>
+            <br> <%= form.text_field :country, class:"w-100" %>
+        </div>
 
-<div class="text-field">
-    <%= form.label :Room %>
-    <%= form.text_field :room %>
-</div>
+        <div class="form-group">
+            <%= form.label :Listing_Images %>
+            <br> <%= form.file_field :images, multiple: true %>
+        </div>
+    </div>
 
-<div class="text-field">
-    <%= form.label :Bath %>
-    <%= form.text_field :bath %>
-</div>
+    <div class="col-3 border-right">
+        <div class="form-group">
+            <%= form.label :Room %>
+            <br> <%= form.text_field :room, class:"w-100" %>
+        </div>
 
-<div class="text-field">
-    <%= form.label :Adult %>
-    <%= form.text_field :adult %>
-</div>
+        <div class="form-group">
+            <%= form.label :Bath %>
+            <br> <%= form.text_field :bath, class:"w-100" %>
+        </div>
 
-<div class="text-field">
-    <%= form.label :Children %>
-    <%= form.text_field :children %>
-</div>
+        <div class="form-group">
+            <%= form.label :Adult %>
+            <br> <%= form.text_field :adult, class:"w-100" %>
+        </div>
 
-<div class="text-field">
-    <%= form.label :Price %>
-    <%= form.text_field :price %>
-</div>
+        <div class="form-group">
+            <%= form.label :Children %>
+            <br> <%= form.text_field :children, class:"w-100" %>
+        </div>
 
-<div class="submit-field">
-    <%= form.submit %>
+        <div class="form-group">
+            <%= form.label :Price %>
+            <br> <%= form.text_field :price, class:"w-100" %>
+        </div>
+    </div>
 </div>
+<div class="submit-field text-center">
+        <%= form.submit class:"btn btn-primary" %>
+    </div>

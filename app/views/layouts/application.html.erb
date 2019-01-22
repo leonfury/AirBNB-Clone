@@ -5,43 +5,59 @@
   src="http://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  
+  <!-- braintree -->
+  <script src="https://js.braintreegateway.com/web/dropin/1.14.1/js/dropin.min.js"></script>
+  <!-- end braintree -->
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
-  <h1> AirBNB CLONE </h1>
-  <h4> Is Sign In? : <%= signed_in? %> </h4>
-  <% if signed_in? %>
-    <p> Current User ID : <%= user_id %>  </p>
-  <% end %>
 
-  <div id="header" class="row">
-    <%= button_to "Home", root_path, method: :get, id: 'test', class: 'btn btn-secondary ml-3' %>
 
-    <% if signed_in? -%>
-      <%= button_to "Create Listings", new_listing_path, method: :get, class: 'btn btn-secondary ml-3' %>
-      <%= button_to "Users", users_path, method: :get, class: 'btn btn-secondary ml-3' %>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete, class: 'btn btn-secondary ml-3' %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <%= link_to "Home", root_path, method: :get, id: 'test', class: 'text-white btn btn-info ml-2' %>
+            <% if signed_in? -%>
+                <%= link_to "My Bookings", bookings_path, class: 'text-white btn btn-info ml-4' %>
+                <%= link_to "Create Listings", new_listing_path, method: :get, class: 'text-white btn btn-info ml-4' %>
+                <% if is_admin? %>
+                    <%= link_to "Users", users_path, method: :get, class: 'text-white btn btn-info ml-4' %>
+                <% end %>  
+            <% end -%>
+        </ul>
+        <% if signed_in? -%>
+            <span class="text-white"> Signed in as : <%= user_name %> | ID: <%= c_user_id %> | <%= current_user.role %> | </span> <%= link_to t(".sign_out"), sign_out_path, method: :delete, class: 'text-white btn btn-info ml-4' %>
+        <% else -%>
+            <%= link_to "Sign Up", sign_up_path, method: :get, class: 'text-white btn btn-info ml-4' %>
+            <%= link_to t(".sign_in"), sign_in_path, method: :get, class: 'text-white btn btn-info ml-4' %>
+            <%= link_to "Sign in with Google", "/auth/google_oauth2", method: :get, class: 'text-white btn btn-info ml-4' %> 
+        <% end %>
+    </div>
+</nav>
 
-    <% else -%>
-      <%= button_to "Sign Up", sign_up_path, method: :get, class: 'btn btn-secondary ml-3' %>
-      <%= button_to t(".sign_in"), sign_in_path, method: :get, class: 'btn btn-secondary ml-3' %>
-      <%= button_to "Sign in with Google", "/auth/google_oauth2", method: :get, class: 'btn btn-secondary ml-3' %> 
-      
-    <% end -%>
-  </div>
 
+    <header class="text-center pt-5 mt-3">
+        <h1> AirBNB CLONE </h1>
+    </header>
   
-  <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
-  </div>
+    <div id="flash">
+        <% flash.each do |key, value| -%>
+        <div id="flash_<%= key %>"><%=h value %></div>
+        <% end %>
+    </div>
 
-  <hr>
-
-  <%= yield %>
+    <hr>
+    
+    <section class="mr-2 ml-2">
+        <%= yield %>
+    </section>  
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>

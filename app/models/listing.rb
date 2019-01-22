@@ -1,7 +1,6 @@
 class Listing < ApplicationRecord
     belongs_to :user
-
-    def filter(search)
-        p search
-    end
+    has_many :bookings
+    paginates_per 15
+    mount_uploaders :images, ImageUploader
 end
